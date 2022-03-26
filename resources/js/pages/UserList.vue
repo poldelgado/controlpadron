@@ -10,9 +10,10 @@ export default {
     components: {
         TableUsers,
     },
+    props: ['url'],
     data() {
         return {
-            hola: "hola mundo"
+            users: [],
         };
     }
 }
