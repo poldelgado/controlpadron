@@ -11,13 +11,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(user, key) in users" :key="key">
+                <!-- <tr v-for="(user, key) in users" :key="key">
                     <td>{{ key + 1}}</td>
                     <td>{{ user.lastname + ', ' + user.name }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.phone }}</td>
                     <td> - </td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
     </div>

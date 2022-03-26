@@ -26,12 +26,10 @@ require('./bootstrap');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+//  import { createApp } from 'vue';
 
- import { createApp } from 'vue'
- import HelloWorld from './components/Welcome'
- 
- const app = createApp({})
- 
- app.component('hello-world', HelloWorld)
- 
- app.mount('#app')
+//  const app = createApp({});
+
+//  app.component('hello-world', require('./components/Welcome.vue').default);
+
+//  app.mount('#app');
