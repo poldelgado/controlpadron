@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Resources\UserAPIResource;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::orderBy('lastname')->get();
+        return UserAPIResource::collection(User::orderBy('lastname')->get());
     }
 
     /**
@@ -81,5 +82,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changeStatus(Request $request, $id){
+
     }
 }
