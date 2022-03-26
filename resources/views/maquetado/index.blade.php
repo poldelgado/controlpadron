@@ -57,21 +57,19 @@
 
         <h2 class="mb-4">Tabla de <strong class="text-info">Egresados</strong></h2>
 
-
-
               <form class="d-flex mb-5">
                 <input class="form-control form-control-lg" type="text" value="Buscar por Nombre o Apellido" aria-label="readonly input example" readonly>
                 <button class="btn btn-outline-secondary btn-lg" type="submit">Buscar</button>
               </form>
 
-
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Llamado</th>
+                            <th scope="col">Intencion de Voto</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,12 +77,14 @@
                             <th scope="row">1</th>
                             <td>Mark</td>
                             <td>Otto</td>
-                            <td>@mdo</td>
+                            <td><button type="button" class="btn btn-primary">
+                                <i class="bi bi-telephone-plus"></i>
+                            </button></td>
                         </tr>
                         <tr>
                             <th scope="row">2</th>
                             <td>Jacob</td>
-                            <td>Thornton</td>
+                            <td>Pepe</td>
                             <td>@fat</td>
                         </tr>
                         <tr>
