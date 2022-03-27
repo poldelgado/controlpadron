@@ -11,20 +11,41 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- <tr v-for="(user, key) in users" :key="key">
+                <tr v-for="(user, key) in users" :key="key">
                     <td>{{ key + 1}}</td>
-                    <td>{{ user.lastname + ', ' + user.name }}</td>
+                    <td>{{ user.apellido_nombre }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.phone }}</td>
-                    <td> - </td>
-                </tr> -->
+                    <td> <button class="btn btn-primary" @click.prevent="showModal(key)">abrir</button></td>
+                </tr>
             </tbody>
         </table>
+        <modal-activate-users ref="modal"></modal-activate-users>
     </div>
 </template>
 
 <script>
+    import ModalActivateUsers from './ModalActivateUsers.vue';
     export default {
+        components: {
+            ModalActivateUsers,
+        },
+        props: ['users'],
+        data() {
+            return {
+                selectedUser: null,
+            }
+        },
+        methods: {
+            showModal(key) {
+                this.selectedUser = this.users[key];
+                this.$refs.modal.showModal();
+            },
+            hideModal() {
+                this.$refs.modal.hideModal();
+                this.selectedUser = null;
+            },
+        },
 
     }
 </script>

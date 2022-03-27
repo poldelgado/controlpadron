@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Resources\UserAPIResource;
+use App\Http\Resources\UserAPIResource;
 
 class UserController extends Controller
 {
@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return UserAPIResource::collection(User::orderBy('lastname')->get());
+        return view('users.index');
     }
 
     /**
@@ -82,6 +82,15 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function get()
+    {
+        $users = UserAPIResource::collection(User::orderBy('lastname')->get());
+        return response()->json([
+            'success' => true,
+            'users' => $users,
+        ]);
     }
 
     public function changeStatus(Request $request, $id){

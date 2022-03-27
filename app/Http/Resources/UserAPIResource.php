@@ -15,7 +15,11 @@ class UserAPIResource extends JsonResource
     public function toArray($request)
     {
         return [
-
+            'id' => $this->id,
+            'apellido_nombre' => ucwords(mb_strtolower($this->lastname. ", ". $this->name)),
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'enabled' => $this->enabled,
         ];
     }
 }
