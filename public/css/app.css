@@ -4033,6 +4033,7 @@ textarea.form-control-lg {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+
 .navbar > .container,
 .navbar > .container-fluid,
 .navbar > .container-sm,
@@ -6073,13 +6074,13 @@ textarea.form-control-lg {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 15%;
+  width: 10%;
   padding: 0;
   color: #fff;
   text-align: center;
   background: none;
   border: 0;
-  opacity: 0.5;
+  opacity: 0.3;
   transition: opacity 0.15s ease;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -11286,4 +11287,3 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
-}
