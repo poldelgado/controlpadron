@@ -24,10 +24,10 @@
         </section>
 
 
-        <h2 class="my-3 display-6">Resumen | <span class="text-info fw-bold"> Accesos Directos</span></h2>
+        <h2 class="my-3 display-6">Resumen<span class="text-info fw-bold"> de Datos</span></h2>
 
-        <section class="d-flex justify-content-around row">
-            <div class="col-sm-6 col-lg-3">
+        <section class="d-flex justify-content-around row mb-3">
+            <div class="col-6 col-md-3">
                 <div class="card text-center shadow-sm my-1 mx-1 ">
                     <div class="p-3">
                         <h3 class="fw-bold">Total del</h3>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-3">
+            <div class="col-6 col-md-3">
                 <div class="card text-center shadow-sm my-1 mx-1 ">
                     <div class="p-3">
                         <h3 class="fw-bold">Total del</h3>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-3">
+            <div class="col-6 col-md-3">
                 <div class="card text-center shadow-sm my-1 mx-1 ">
                     <div class="p-3">
                         <h3 class="fw-bold">Total</h3>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-3">
+            <div class="col-6 col-md-3">
                 <div class="card text-center shadow-sm my-1 mx-1 ">
                     <div class="p-3">
                         <h3 class="fw-bold">Total</h3>
@@ -65,112 +65,102 @@
             </div>
         </section>
 
-        <div class="row row-cols-1 row-cols-md-4 g-4 my-3">
-            <div class="col">
-                <div class="card h-100 text-white bg-info mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Header</div>
-                    <div class="card-body">
-                        <h5 class="card-title">Primary card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 text-white bg-secondary mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Header</div>
-                    <div class="card-body">
-                        <h5 class="card-title">Secondary card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 text-white bg-success mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Header</div>
-                    <div class="card-body">
-                        <h5 class="card-title">Success card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 text-white bg-danger mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Header</div>
-                    <div class="card-body">
-                        <h5 class="card-title">Danger card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <h2 class="my-3 display-6">Tabla de <span class="text-info fw-bold">Egresados</span></h2>
 
-        <form class="d-flex my-3">
-            <input class="form-control form-control-lg" type="text" value="Buscar por Nombre o Apellido"
-                aria-label="readonly input example" readonly>
-            <button class="btn btn-outline-secondary btn-lg" type="submit">Buscar</button>
-        </form>
+        <section class="card shadow-sm mb-3">
+            <form class="d-flex px-3 py-4">
+                <input class="form-control form-control-lg border border-secondary me-3 text-secondary" type="text"
+                    value="Buscar por Nombre, Apellido o DNI" aria-label="readonly input example" readonly>
+                <button class="btn btn-primary btn-lg" type="submit">Buscar</button>
+            </form>
+        </section>
 
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Llamado</th>
-                    <th scope="col">Intencion de Voto</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td><button type="button" class="btn btn-primary">
-                            <i class="bi bi-telephone-plus"></i>
-                        </button></td>
-                    <td>
-                        <div class="d-grid gap-2 d-md-block">
-                            <button class="btn btn-primary" type="button">Button</button>
-                            <button class="btn btn-primary" type="button">Button</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Pepe</td>
-                    <td><button type="button" class="btn btn-primary">
-                            <i class="bi bi-telephone-plus"></i>
-                        </button></td>
-                    <td>
-                        <div class="d-grid gap-2 d-md-block">
-                            <button class="btn btn-primary" type="button">Button</button>
-                            <button class="btn btn-primary" type="button">Button</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td><button type="button" class="btn btn-primary">
-                            <i class="bi bi-telephone-plus"></i>
-                        </button></td>
-                    <td>
-                        <div class="d-grid gap-2 d-md-block">
-                            <button class="btn btn-primary" type="button">Button</button>
-                            <button class="btn btn-primary" type="button">Button</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
 
+
+        <section class="card shadow-sm mb-3 py-3">
+            <table class="table table-striped table-hover table-responsive">
+                <thead class="text-center">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Llamado</th>
+                        <th scope="col">Intencion de Voto</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center align-middle">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Apellido 1</td>
+                        <td>Nombre 1</td>
+                        <td>
+                            <a href="" class="text-decoration-none">
+                                <i class="bi bi-telephone-plus-fill text-primary iconos px-2"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <div>
+                                <a href="" class="text-decoration-none">
+                                    <i class="bi bi-hand-thumbs-up-fill text-success iconos px-2"></i>
+                                </a>
+                                <a href="" class="text-decoration-none">
+                                    <i class="bi bi-hand-thumbs-down-fill text-danger iconos px-2"></i>
+                                </a>
+                                <a href="" class="text-decoration-none">
+                                    <i class="bi bi-question-circle-fill text-info iconos px-2"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Apellido 2</td>
+                        <td>Nombre 2</td>
+                        <td>
+                            <a href="" class="text-decoration-none">
+                                <i class="bi bi-telephone-plus-fill text-secondary iconos px-2"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <div>
+                                <a href="" class="text-decoration-none">
+                                    <i class="bi bi-hand-thumbs-up-fill text-secondary iconos px-2"></i>
+                                </a>
+                                <a href="" class="text-decoration-none">
+                                    <i class="bi bi-hand-thumbs-down-fill text-secondary iconos px-2"></i>
+                                </a>
+                                <a href="" class="text-decoration-none">
+                                    <i class="bi bi-question-circle-fill text-secondary iconos px-2"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Apellido 3</td>
+                        <td>Nombre 3</td>
+                        <td>
+                            <a href="" class="text-decoration-none">
+                                <i class="bi bi-telephone-plus-fill text-secondary iconos px-2"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <div>
+                                <a href="" class="text-decoration-none">
+                                    <i class="bi bi-hand-thumbs-up-fill text-secondary iconos px-2"></i>
+                                </a>
+                                <a href="" class="text-decoration-none">
+                                    <i class="bi bi-hand-thumbs-down-fill text-secondary iconos px-2"></i>
+                                </a>
+                                <a href="" class="text-decoration-none">
+                                    <i class="bi bi-question-circle-fill text-secondary iconos px-2"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
@@ -185,13 +175,8 @@
                 </li>
             </ul>
         </nav>
-
-
-
     </main>
-    <footer>
-        <div class="bg bg-primary mt-5 py-5">
-            soy un footer
-        </div>
+    <footer class="bg bg-primary mt-5 py-3">
+        <p class="text-white text-center">Copyright © Todos los derechos reservados - 2022</p>
     </footer>
 @endsection
