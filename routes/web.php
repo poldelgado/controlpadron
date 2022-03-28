@@ -21,4 +21,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::view('/maquetado','maquetado.index')->name('maquetado');
+Route::get('/users/get',[App\Http\Controllers\UserController::class,'get'])->name('users.get');
 Route::resource('/users',App\Http\Controllers\UserController::class);
