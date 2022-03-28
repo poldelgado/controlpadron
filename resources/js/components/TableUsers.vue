@@ -20,7 +20,20 @@
                 </tr>
             </tbody>
         </table>
-        <modal-activate-users ref="modal"></modal-activate-users>
+        <modal-activate-users ref="modal" :title="modalTitle">
+            <template v-slot:body>
+                <h2 v-if="selectedUser != null">
+                    Apellido y Nombre: <strong>{{selectedUser.apellido_nombre}}</strong>
+                </h2>
+            </template>
+            <template v-slot:footer>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="button">
+                       <strong>CAMBIAR</strong>
+                    </button>
+                </div>
+            </template>
+        </modal-activate-users>
     </div>
 </template>
 
@@ -35,6 +48,11 @@
             return {
                 selectedUser: null,
             }
+        },
+        computed: {
+            modalTitle() {
+                return this.selectedUser ? 'Cambiar Estado a: '+ this.selectedUser.apellido_nombre:'';
+                }
         },
         methods: {
             showModal(key) {

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,5 +21,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::view('/maquetado','maquetado.index')->name('maquetado');
-Route::get('/users/get',[App\Http\Controllers\UserController::class,'get'])->name('users.get');
-Route::resource('/users',App\Http\Controllers\UserController::class);
+Route::get('/users/get',[UserController::class,'get'])->name('users.get');
+Route::post('/users/change_status/{user_id}',[UserController::class,'changeStatus'])->name('users.changeStatus');
+Route::resource('/users',UserController::class);
