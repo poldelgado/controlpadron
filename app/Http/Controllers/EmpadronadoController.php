@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empadronado;
+use App\Http\Resources\EmpadronadoAPIResource;
 use Illuminate\Http\Request;
 
 class EmpadronadoController extends Controller
@@ -84,6 +86,22 @@ class EmpadronadoController extends Controller
 
     public function get()
     {
+        $empadronados = EmpadronadoAPIResource::collection(
+            Empadronado::orderBy('apellido')
+                        ->orderBy('nombre')
+                        ->get()
+        );
 
+        if ($empadronados) {
+            return response()->json([
+                'success' => true,
+                'message' => 'response correcta',
+                'empadronados' => $empadronados,
+            ],200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'No se encontraron empadronados',
+        ],400);
     }
 }
