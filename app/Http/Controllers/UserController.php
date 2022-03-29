@@ -94,13 +94,12 @@ class UserController extends Controller
     }
 
     public function changeStatus(Request $request, $id){
-       //dd($request->status);
         $this->validate($request, [
              'status' => 'required|boolean',
          ]);
-        //$action = $request->status ? 'habilitado':'desabilitado';
+
         $user = User::findOrFail($id);
-        //dd($user);
+
         $user->enabled = $request->status;
         if ($user->save()) {
             return response()->json([

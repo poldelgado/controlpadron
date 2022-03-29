@@ -7,6 +7,7 @@
                     <td>Apellido y Nombre</td>
                     <td>Email</td>
                     <td>Telefono</td>
+                    <td>Estado</td>
                     <td>- - -</td>
                 </tr>
             </thead>
@@ -16,6 +17,7 @@
                     <td>{{ user.apellido_nombre }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.phone }}</td>
+                    <td>{{ userStatus(user.enabled) }}</td>
                     <td>
                         <div class="btn-toolbar" role="toolbar">
                             <div class="btn-group" role="group">
@@ -75,10 +77,12 @@
                 this.$refs.modal.hideModal();
                 this.selectedUser = null;
             },
+            userStatus(status) {
+                return status ? 'ACTIVO':'NO ACTIVO';
+            },
             changeStatus(user) {
-                const url = baseURL + '/users/api/change_status/'+user.id;
-                let status = !user.status;
-                //formData.append('status',!user.enabled);
+                const url = baseURL + '/users/change_status/'+user.id;
+                const status = !user.enabled;
                 axios.post(url, {
                     status: status,
                 }).then(response => {
