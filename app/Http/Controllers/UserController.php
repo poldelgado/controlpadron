@@ -94,6 +94,23 @@ class UserController extends Controller
     }
 
     public function changeStatus(Request $request, $id){
-
+       //dd($request->status);
+        $this->validate($request, [
+             'status' => 'required|boolean',
+         ]);
+        //$action = $request->status ? 'habilitado':'desabilitado';
+        $user = User::findOrFail($id);
+        //dd($user);
+        $user->enabled = $request->status;
+        if ($user->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Solicitud procesada con éxito'
+            ],201);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Ocurrió un error al procesar la solicitud',
+        ],400);
     }
 }

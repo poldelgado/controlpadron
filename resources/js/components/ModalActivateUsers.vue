@@ -19,10 +19,10 @@
 <script>
 import { Modal } from 'bootstrap'; //Para poder utilizar modal en vue3 sin jquery
 export default {
-    props: ['title'],
     data() {
         return {
             modal: null,
+            title: null,
             selectedUser: null,
         }
     },

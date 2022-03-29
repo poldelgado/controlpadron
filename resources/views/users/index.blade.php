@@ -3,5 +3,5 @@
    <user-list url="{{route('users.get')}}"></user-list>
 @endsection
 @section('scripts')
-<script src="{{mix('js/userslist.js')}}"></script>
+<script src="{{asset(mix('js/userslist.js'))}}"></script>
 @endsection
