@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EmpadronadoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +25,4 @@ Route::view('/maquetado','maquetado.index')->name('maquetado');
 Route::get('/users/get',[UserController::class,'get'])->name('users.get');
 Route::post('/users/change_status/{user_id}',[UserController::class,'changeStatus'])->name('users.changeStatus');
 Route::resource('/users',UserController::class);
+Route::resource('/padron',EmpadronadoController::class);
