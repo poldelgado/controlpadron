@@ -55,7 +55,7 @@
 </template>
 
 <script>
-    import ModalActivateUsers from './ModalActivateUsers.vue';
+    import ModalActivateUsers from './Modal.vue';
     export default {
         components: {
             ModalActivateUsers,
