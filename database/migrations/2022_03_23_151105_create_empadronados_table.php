@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('empadronados', function (Blueprint $table) {
             $table->id();
-            $table->string('apellido_nombre');
+            $table->string('apellido');
+            $table->string('nombre');
             $table->integer('dni')->unique();
             $table->boolean('llamado')->default(false);
-            $table->foreignId('lista_id');
+            $table->foreignId('lista_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
