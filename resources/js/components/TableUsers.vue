@@ -1,14 +1,14 @@
 <template>
     <div class="content">
-        <table id="users" class="table">
+        <table id="users" class="table table-hover">
             <thead>
                 <tr>
-                    <td>#</td>
-                    <td>Apellido y Nombre</td>
-                    <td>Email</td>
-                    <td>Telefono</td>
-                    <td>Estado</td>
-                    <td>- - -</td>
+                    <th>#</th>
+                    <th>Apellido y Nombre</th>
+                    <th>Email</th>
+                    <th>Telefono</th>
+                    <th>Estado</th>
+                    <th>- - -</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,7 +56,7 @@
 
 <script>
     import ModalActivateUsers from './Modal.vue';
-    import DataTable from 'datatables';
+    //import DataTable from 'datatables';
     export default {
         components: {
             ModalActivateUsers,

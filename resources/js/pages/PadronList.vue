@@ -27,30 +27,46 @@
                     tipo="en Contra"
                     total="420"
                     add-color="text-danger"
-                 />
+                />
             </div>
         </section>
-        <table-padron :empadronados="empadronados"></table-padron>
+        <section class="card shadow-sm mb-3">
+            <SearchBar />
+        </section>
+        <section class="card shadow-sm mtb-3 py-3">
+            <TablePadron
+             :empadronados="empadronados.data"
+            />
+        </section>
     </div>
 </template>
 <script>
     import TablePadron from '../components/TablePadron.vue';
     import CardResultado from '../components/CardResultado.vue';
+    import SearchBar from '../components/SearchBar.vue';
+
 export default {
     components: {
         TablePadron,
         CardResultado,
+        SearchBar,
     },
     props: ['url'],
     data() {
         return {
-            empadronados: [],
+            empadronados: {
+                data: [],
+                links: null,
+                meta: null,
+                },
         }
     },
     methods: {
         getEmpadronados() {
              axios.get(this.url).then(response => {
-                this.empadronados = response.data.empadronados;
+                this.empadronados.data = response.data.data;
+                this.empadronados.links = response.data.links;
+                this.empadronados.meta = response.data.meta;
             });
         },
     },

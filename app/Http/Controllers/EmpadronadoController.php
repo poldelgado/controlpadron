@@ -89,19 +89,21 @@ class EmpadronadoController extends Controller
         $empadronados = EmpadronadoAPIResource::collection(
             Empadronado::orderBy('apellido')
                         ->orderBy('nombre')
-                        ->get()
+                        ->paginate(50)
         );
-
-        if ($empadronados) {
-            return response()->json([
-                'success' => true,
-                'message' => 'response correcta',
-                'empadronados' => $empadronados,
-            ],200);
-        }
-        return response()->json([
-            'success' => false,
-            'message' => 'No se encontraron empadronados',
-        ],400);
+        return $empadronados;
+        // if ($empadronados) {
+        //     return response()->json([
+        //         'success' => true,
+        //         'message' => 'response correcta',
+        //         'empadronados' => $empadronados,
+        //         'links' => $empadronados->links,
+        //         'meta' => $empadronados->meta,
+        //     ],200);
+        // }
+        // return response()->json([
+        //     'success' => false,
+        //     'message' => 'No se encontraron empadronados',
+        // ],400);
     }
 }
