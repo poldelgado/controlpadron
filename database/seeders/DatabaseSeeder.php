@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'password' => '$2y$10$UcsQvZ32Tjd6GmBYxalkjeMc2rQTQX4VN11ZVQbAIkXbo3Tt7h9Ni',
             'remember_token' => Str::random(10),
         ]);
-        \App\Models\User::factory(2000)->create();
-        \App\Models\Empadronado::factory(2800)->create();
+        \App\Models\User::factory(100)->create();
+        \App\Models\Empadronado::factory(3587)->create();
     }
 }

@@ -67,13 +67,18 @@ export default {
         getEmpadronados(url) {
              axios.get(url).then(response => {
                 this.empadronados = response.data;
-                //this.empadronados.links = response.data.links;
+                if (response.data.meta !== null || response.data.meta !== undefined) {
+                    response.data.meta.links[0].label="Previo";
+                    response.data.meta.links[response.data.meta.links.length - 1].label="Próximo";
+                }
+
                 //this.empadronados.data = response.data.data;
             });
         },
     },
     mounted() {
         this.getEmpadronados(this.url);
+
     }
 }
 </script>
