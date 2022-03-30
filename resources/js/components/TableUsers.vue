@@ -56,6 +56,7 @@
 
 <script>
     import ModalActivateUsers from './Modal.vue';
+    import DataTable from 'datatables';
     export default {
         components: {
             ModalActivateUsers,
@@ -68,6 +69,35 @@
             }
         },
         methods: {
+            myTable() {
+               $(function() {
+                 $('#users').DataTable({
+                    "language": {
+                        "processing": "Procesando...",
+                        "search": "Buscar",
+                        "lengthMenu": "Mostrar _MENU_ registros",
+                        "info": "Mostrando notificaciones de _START_ a _END_ de un total de _TOTAL_",
+                        "zeroRecords": "No se encontraron resultados",
+                        "emptyTable": "Ud. no tiene notificaciones.",
+                        "infoEmpty": "No hay notificaciones disponibles",
+                        "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "infoPostFix": "",
+                        "infoThousands": ",",
+                        "loadingRecords": "Cargando...",
+                        "paginate": {
+                            first: 'Primero',
+                            previous: 'Anterior',
+                            next: 'Siguiente',
+                            last: 'Ultimo',
+                        },
+                        "aria": {
+                            "sortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+                    },
+                 });
+               });
+            },
             showModal(user, action) {
                 this.selectedUser = user;
                 this.$refs.modal.title = action === 'activar' ? 'ACTIVAR USUARIO':'DESACTIVAR USUARIO';
@@ -100,6 +130,9 @@
                 })
             },
         },
+        mounted() {
+            this.myTable();
+        }
 
     }
 </script>
