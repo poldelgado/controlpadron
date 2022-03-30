@@ -1,5 +1,8 @@
 <template>
     <div>
+        <section>
+            <Carrousel />
+        </section>
         <section v-if="empadronados" class="d-flex justify-content-around row mb-3">
             <div class="col-6 col-md-3">
                 <CardResultado
@@ -45,6 +48,7 @@
     </div>
 </template>
 <script>
+    import Carrousel from '../components/Carrousel.vue';
     import TablePadron from '../components/TablePadron.vue';
     import CardResultado from '../components/CardResultado.vue';
     import SearchBar from '../components/SearchBar.vue';
@@ -52,12 +56,13 @@
 
 export default {
     components: {
+        Carrousel,
         TablePadron,
         CardResultado,
         SearchBar,
         Pagination,
     },
-    props: ['url'],
+    props: ['url','urlBanner'],
     data() {
         return {
             empadronados: null,
