@@ -43,7 +43,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">
                                         <i class="bi bi-person-circle"></i>
-                                        {{ __('Iniciar Sesión') }}</a>
+                                        Iniciar Sesión</a>
                                 </li>
                             @endif
 
