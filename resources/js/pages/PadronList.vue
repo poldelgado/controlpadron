@@ -1,10 +1,10 @@
 <template>
     <div>
-        <section class="d-flex justify-content-around row mb-3">
+        <section v-if="empadronados" class="d-flex justify-content-around row mb-3">
             <div class="col-6 col-md-3">
                 <CardResultado
                     tipo="Padrón"
-                    total="3145"
+                    :total="empadronados.meta.total"
                     add-color="text-primary"
                  />
             </div>
@@ -33,10 +33,14 @@
         <section class="card shadow-sm mb-3">
             <SearchBar />
         </section>
-        <section class="card shadow-sm mtb-3 py-3">
+        <section v-if="empadronados" class="card shadow-sm mtb-3 py-3">
             <TablePadron
              :empadronados="empadronados.data"
             />
+        </section>
+        <section v-if="empadronados" class="card shadow-sm mtb-3 py-3">
+            <Pagination
+                :links="empadronados.meta.links" />
         </section>
     </div>
 </template>
@@ -44,34 +48,32 @@
     import TablePadron from '../components/TablePadron.vue';
     import CardResultado from '../components/CardResultado.vue';
     import SearchBar from '../components/SearchBar.vue';
+    import Pagination from '../components/Pagination.vue';
 
 export default {
     components: {
         TablePadron,
         CardResultado,
         SearchBar,
+        Pagination,
     },
     props: ['url'],
     data() {
         return {
-            empadronados: {
-                data: [],
-                links: null,
-                meta: null,
-                },
+            empadronados: null,
         }
     },
     methods: {
-        getEmpadronados() {
-             axios.get(this.url).then(response => {
-                this.empadronados.data = response.data.data;
-                this.empadronados.links = response.data.links;
-                this.empadronados.meta = response.data.meta;
+        getEmpadronados(url) {
+             axios.get(url).then(response => {
+                this.empadronados = response.data;
+                //this.empadronados.links = response.data.links;
+                //this.empadronados.data = response.data.data;
             });
         },
     },
-    created() {
-        this.getEmpadronados();
+    mounted() {
+        this.getEmpadronados(this.url);
     }
 }
 </script>

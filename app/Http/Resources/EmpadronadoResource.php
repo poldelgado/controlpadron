@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EmpadronadoAPIResource extends JsonResource
+class EmpadronadoResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -12,6 +12,7 @@ class EmpadronadoAPIResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
+
     public function toArray($request)
     {
         return [

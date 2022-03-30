@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empadronado;
-use App\Http\Resources\EmpadronadoAPIResource;
+use App\Http\Resources\EmpadronadoCollection;
 use Illuminate\Http\Request;
 
 class EmpadronadoController extends Controller
@@ -86,24 +86,29 @@ class EmpadronadoController extends Controller
 
     public function get()
     {
-        $empadronados = EmpadronadoAPIResource::collection(
+        $empadronados = new EmpadronadoCollection(
             Empadronado::orderBy('apellido')
                         ->orderBy('nombre')
                         ->paginate(50)
         );
+
         return $empadronados;
-        // if ($empadronados) {
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => 'response correcta',
-        //         'empadronados' => $empadronados,
-        //         'links' => $empadronados->links,
-        //         'meta' => $empadronados->meta,
-        //     ],200);
-        // }
-        // return response()->json([
-        //     'success' => false,
-        //     'message' => 'No se encontraron empadronados',
-        // ],400);
+        $links = [];
+        if ($empadronados->currentPage() <= 5) {
+            $links[] = $empadronados->getUrlRange(1,5);
+        }
+        if ($empadronados) {
+            return response()->json([
+                'success' => true,
+                'message' => 'response correcta',
+                'empadronados' => $empadronados,
+                'total' => $empadronados->total(),
+                'links' => $links,
+            ],200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'No se encontraron empadronados',
+        ],400);
     }
 }
