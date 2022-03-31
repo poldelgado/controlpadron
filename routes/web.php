@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmpadronadoController;
+use App\Http\Controllers\ListaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,3 +29,4 @@ Route::post('/users/change_status/{user_id}',[UserController::class,'changeStatu
 Route::resource('/users',UserController::class);
 Route::get('/padron/get',[EmpadronadoController::class,'get'])->name('padron.get');
 Route::resource('/padron',EmpadronadoController::class);
+Route::resource('/lista',ListaController::class);

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->integer('dni')->unique();
             $table->boolean('llamado')->default(false);
-            $table->foreignId('lista_id')->nullable()->constrained();
+            $table->integer('intencion_voto')->default(1);
             $table->timestamps();
         });
     }
