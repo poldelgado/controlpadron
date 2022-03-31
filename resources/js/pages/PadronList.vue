@@ -7,28 +7,28 @@
             <div class="col-6 col-md-3">
                 <CardResultado
                     tipo="Padrón"
-                    :total="empadronados.meta.total"
+                    :total="numeros.total"
                     add-color="text-primary"
                  />
             </div>
             <div class="col-6 col-md-3">
                 <CardResultado
                     tipo="Llamados"
-                    total="1389"
+                    :total="numeros.llamados"
                     add-color="text-info"
                  />
             </div>
             <div class="col-6 col-md-3">
                 <CardResultado
                     tipo="a Favor"
-                    total="951"
+                    :total="numeros.favor"
                     add-color="text-success"
                  />
             </div>
             <div class="col-6 col-md-3">
                 <CardResultado
                     tipo="en Contra"
-                    total="420"
+                    :total="numeros.contra"
                     add-color="text-danger"
                 />
             </div>
@@ -62,10 +62,11 @@ export default {
         SearchBar,
         Pagination,
     },
-    props: ['url','urlBanner'],
+    props: ['url','urlNumeros','urlBanner'],
     data() {
         return {
             empadronados: null,
+            numeros: null,
         }
     },
     methods: {
@@ -80,10 +81,15 @@ export default {
                 //this.empadronados.data = response.data.data;
             });
         },
+        getNumeros(urlNumeros) {
+            axios.get(urlNumeros).then(response => {
+                this.numeros = response.data;
+            });
+        },
     },
-    mounted() {
+    created() {
+        this.getNumeros(this.urlNumeros);
         this.getEmpadronados(this.url);
-
     }
 }
 </script>

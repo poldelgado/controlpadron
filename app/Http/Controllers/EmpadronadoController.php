@@ -36,7 +36,7 @@ class EmpadronadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -91,24 +91,23 @@ class EmpadronadoController extends Controller
                         ->orderBy('nombre')
                         ->paginate(50)
         );
-
         return $empadronados;
-        $links = [];
-        if ($empadronados->currentPage() <= 5) {
-            $links[] = $empadronados->getUrlRange(1,5);
-        }
-        if ($empadronados) {
-            return response()->json([
-                'success' => true,
-                'message' => 'response correcta',
-                'empadronados' => $empadronados,
-                'total' => $empadronados->total(),
-                'links' => $links,
-            ],200);
-        }
-        return response()->json([
-            'success' => false,
-            'message' => 'No se encontraron empadronados',
-        ],400);
+    }
+
+    public function getNumeros()
+    {
+        $total = count(Empadronado::all());
+        $llamados = count(Empadronado::where('llamado',1)->get());
+        $favor = count(Empadronado::where('intencion_voto',2)->get());
+        $contra = count(Empadronado::where('intencion_voto',3)->get());
+
+        $data = [
+            'total' => $total,
+            'llamados' => $llamados,
+            'favor' => $favor,
+            'contra' => $contra,
+        ];
+
+        return $data;
     }
 }
