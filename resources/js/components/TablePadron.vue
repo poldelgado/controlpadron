@@ -16,9 +16,13 @@
                     <td>{{ empadronado.apellido_nombre }}</td>
                     <td>{{ empadronado.dni }}</td>
                     <td>
-                        <a href="#" class="text-decoration-none">
-                            <i class="bi bi-telephone-plus-fill text-primary iconos px-2"></i>
+                        <a v-if="!empadronado.llamado" href="#" class="text-decoration-none" @click.prevent="showModal(key)">
+                            <i class="bi bi-telephone-plus-fill text-secondary iconos px-2"></i>
                         </a>
+                        <a v-else class="text-decoration-none" @click.prevent="showModal(key)">
+                            <i class="bi bi-telephone text-success iconos px-2"></i>
+                        </a>
+
                     </td>
                     <td>
                         <div>
@@ -36,15 +40,63 @@
                 </tr>
             </tbody>
         </table>
+        <modal
+            ref="modalLlamada"
+            idmodal="modalllamada"
+            sizemodal="modal-lg"
+        >
+        <template v-slot:body>
+            <h2 v-if="selectedEmpadronado !=null">
+                ¿Registrar llamada a <strong>{{selectedEmpadronado.apellido_nombre}}</strong>?
+            </h2>
+        </template>
+        <template v-slot:footer>
+            <button class="btn btn-primary" @click.prevent="submitLlamada">REGISTRAR</button>
+        </template>
+        </modal>
+
     </div>
 </template>
 
 <script>
-
+import Modal from './Modal.vue';
 export default {
+    components: {
+        Modal,
+    },
     props: ['empadronados'],
+    data() {
+        return {
+            selectedEmpadronado: null,
+        }
+    },
     methods: {
+        showModal(key) {
+            this.selectedEmpadronado = this.empadronados[key];
+            this.$refs.modalLlamada.showModal();
+        },
+        hideModal() {
+                this.$refs.modal.hideModal();
+                this.selectedEmpadronado = null;
+            },
+        submitLlamada() {
+            const urlLlamada = baseURL+'/padron/llamada/'+this.selectedEmpadronado.id;
+            axios.post(urlLlamada, {
+                llamada: true,
+            }).then(response => {
+                if (response.data.success) {
+                    this.selectedEmpadronado.llamada = true,
+                    console.log(response.data.message);
+                    this.hideModal();
 
+                } else {
+                    console.log(response.data.message);
+                }
+            }).catch(error => {
+                    this.errors = error;
+                    console.log(this.errors);
+                });
+        },
     },
     mounted() {
 

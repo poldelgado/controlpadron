@@ -19,6 +19,8 @@ class EmpadronadoResource extends JsonResource
             'id' => $this->id,
             'apellido_nombre' => $this->apellido.", ".$this->nombre,
             'dni' => $this->dni,
+            'llamado' => $this->llamado,
+            'intencion_voto' => $this->intencion_voto,
         ];
     }
 }

@@ -14,4 +14,14 @@ class Empadronado extends Model
         'nombre',
         'dni',
     ];
+
+
+     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'llamado' => 'boolean',
+    ];
 }

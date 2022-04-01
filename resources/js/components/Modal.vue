@@ -1,6 +1,6 @@
 <template>
-    <div class="modal fade" id="modalUserActivate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal fade" :id="idmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" :class="sizemodal">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="modal_title">{{title}}</h5>
@@ -19,6 +19,10 @@
 <script>
 import { Modal } from 'bootstrap'; //Para poder utilizar modal en vue3 sin jquery
 export default {
+    props: [
+            'idmodal',
+            'sizemodal',
+            ],
     data() {
         return {
             modal: null,
@@ -35,7 +39,7 @@ export default {
         },
     },
     mounted() {
-        this.modal = new Modal(document.getElementById('modalUserActivate'))
+        this.modal = new Modal(document.getElementById(this.idmodal))
     }
 }
 </script>

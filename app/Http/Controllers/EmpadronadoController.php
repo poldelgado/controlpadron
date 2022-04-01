@@ -110,4 +110,24 @@ class EmpadronadoController extends Controller
 
         return $data;
     }
+
+    public function setLlamada(Request $request, $id)
+    {
+        $this->validate($request, [
+            'llamada' => 'required|boolean',
+        ]);
+       $empadronado = Empadronado::findOrFail($id);
+
+       $empadronado->llamada = $request->llamada;
+       if ($empadronado->save()) {
+           return response()->json([
+               'success' => true,
+               'message' => 'Llamada registrada con éxito'
+           ],201);
+       }
+       return response()->json([
+           'success' => false,
+           'message' => 'Ocurrió un error al registrar la llamada',
+       ],400);
+    }
 }
