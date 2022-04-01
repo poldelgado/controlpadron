@@ -111,14 +111,15 @@ class EmpadronadoController extends Controller
         return $data;
     }
 
-    public function setLlamada(Request $request, $id)
+    public function setLlamado(Request $request, $id)
     {
         $this->validate($request, [
-            'llamada' => 'required|boolean',
+            'llamado' => 'required|boolean',
         ]);
        $empadronado = Empadronado::findOrFail($id);
 
-       $empadronado->llamada = $request->llamada;
+       $empadronado->llamado = $request->llamado;
+
        if ($empadronado->save()) {
            return response()->json([
                'success' => true,
@@ -128,6 +129,27 @@ class EmpadronadoController extends Controller
        return response()->json([
            'success' => false,
            'message' => 'Ocurrió un error al registrar la llamada',
+       ],400);
+    }
+
+    public function setIV(Request $request, $id)
+    {
+        $this->validate($request, [
+            'intencion' => 'required|integer',
+        ]);
+       $empadronado = Empadronado::findOrFail($id);
+
+       $empadronado->intencion_voto = $request->intencion;
+
+       if ($empadronado->save()) {
+           return response()->json([
+               'success' => true,
+               'message' => 'intención de voto registrada con éxito'
+           ],201);
+       }
+       return response()->json([
+           'success' => false,
+           'message' => 'Ocurrió un error al registrar la intención de voto',
        ],400);
     }
 }

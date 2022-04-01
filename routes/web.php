@@ -29,6 +29,7 @@ Route::post('/users/change_status/{user_id}',[UserController::class,'changeStatu
 Route::resource('/users',UserController::class);
 Route::get('/padron/get',[EmpadronadoController::class,'get'])->name('padron.get');
 Route::get('/padron/getNumeros',[EmpadronadoController::class,'getNumeros'])->name('padron.getNumeros');
-Route::post('/padron/llamada/{id}',[EmpadronadoController::class,'setLlamada'])->name('padron.setLlamada');
+Route::post('/padron/llamado/{id}',[EmpadronadoController::class,'setLlamado'])->name('padron.setLlamada');
+Route::post('/padron/iv/{id}',[EmpadronadoController::class,'setIV'])->name('padron.setIV');
 Route::resource('/padron',EmpadronadoController::class);
 Route::resource('/lista',ListaController::class);

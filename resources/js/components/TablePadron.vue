@@ -19,27 +19,26 @@
                         <a v-if="!empadronado.llamado" href="#" class="text-decoration-none" @click.prevent="showModal(key)">
                             <i class="bi bi-telephone-plus-fill text-secondary iconos px-2"></i>
                         </a>
-                        <a v-else class="text-decoration-none" @click.prevent="showModal(key)">
+                        <a v-else class="text-decoration-none">
                             <i class="bi bi-telephone text-success iconos px-2"></i>
                         </a>
 
                     </td>
                     <td>
                         <div>
-                            <a href="#" class="text-decoration-none">
-                                <i class="bi bi-hand-thumbs-up-fill text-success iconos px-2"></i>
-                            </a>
-                            <a href="#" class="text-decoration-none">
-                                <i class="bi bi-hand-thumbs-down-fill text-danger iconos px-2"></i>
-                            </a>
-                            <a href="#" class="text-decoration-none">
+                            <a v-if="empadronado.intencion_voto===1"  href="#" @click.prevent="showModalIV(key)" class="text-decoration-none">
                                 <i class="bi bi-question-circle-fill text-info iconos px-2"></i>
+                            </a>
+                            <a v-else class="text-decoration-none">
+                                <i v-if="empadronado.intencion_voto===2" @click.prevent="showModalIV(key)" class="bi bi-hand-thumbs-up-fill text-success iconos px-2"></i>
+                                <i v-if="empadronado.intencion_voto===3" @click.prevent="showModalIV(key)" class="bi bi-hand-thumbs-down-fill text-danger iconos px-2"></i>
                             </a>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <!-- modal registrar llamada -->
         <modal
             ref="modalLlamada"
             idmodal="modalllamada"
@@ -54,7 +53,32 @@
             <button class="btn btn-primary" @click.prevent="submitLlamada">REGISTRAR</button>
         </template>
         </modal>
-
+        <!-- modal intencion de voto -->
+        <modal
+            ref="modaliv"
+            idmodal="modalintencion"
+            sizemodal="modal-lg"
+        >
+        <template v-slot:body>
+             <h2 v-if="selectedEmpadronado !=null">
+                ¿Registrar intención de voto a <strong>{{selectedEmpadronado.apellido_nombre}}</strong>?
+            </h2>
+        </template>
+        <template v-slot:footer>
+           <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group me-2" role="group" aria-label="First group">
+                    <button type="button" @click.prevent="submitIV(3)" class="btn btn-danger">
+                        VOTA OPOSICIÓN <i class="bi bi-hand-thumbs-down-fill iconos px-2"></i>
+                    </button>
+                </div>
+                <div class="btn-group me-2" role="group">
+                    <button type="button" @click.prevent="submitIV(2)" class="btn btn-success">
+                        VOTA A FAVOR <i class="bi bi-hand-thumbs-up-fill iconos px-2"></i>
+                    </button>
+                </div>
+            </div>
+        </template>
+        </modal>
     </div>
 </template>
 
@@ -76,16 +100,25 @@ export default {
             this.$refs.modalLlamada.showModal();
         },
         hideModal() {
-                this.$refs.modal.hideModal();
+                this.$refs.modalLlamada.hideModal();
+                this.selectedEmpadronado = null;
+            },
+        showModalIV(key) {
+            this.selectedEmpadronado = this.empadronados[key];
+            this.$refs.modaliv.showModal();
+        },
+         hideModalIV() {
+                this.$refs.modaliv.hideModal();
                 this.selectedEmpadronado = null;
             },
         submitLlamada() {
-            const urlLlamada = baseURL+'/padron/llamada/'+this.selectedEmpadronado.id;
+            const urlLlamada = baseURL+'/padron/llamado/'+this.selectedEmpadronado.id;
             axios.post(urlLlamada, {
-                llamada: true,
+                llamado: true,
             }).then(response => {
                 if (response.data.success) {
-                    this.selectedEmpadronado.llamada = true,
+                    this.selectedEmpadronado.llamado = true,
+                    this.$parent.numeros.llamados++;
                     console.log(response.data.message);
                     this.hideModal();
 
@@ -97,6 +130,28 @@ export default {
                     console.log(this.errors);
                 });
         },
+        submitIV(intencion) {
+            const urlIV = baseURL + '/padron/iv/'+this.selectedEmpadronado.id;
+            axios.post(urlIV, {
+                intencion: intencion,
+            }).then(response => {
+                if (response.data.success) {
+                    this.selectedEmpadronado.intencion_voto = intencion;
+                    if (intencion === 2) {
+                        this.$parent.numeros.favor++;
+                    } else if (intencion === 3) {
+                        this.$parent.numeros.contra++;
+                    }
+                    this.hideModalIV();
+                    console.log(response.data.message);
+                } else {
+                    console.log("ERROR!!!: "+response.data.message);
+                }
+            }).catch(error => {
+                    this.errors = error;
+                    console.log(this.errors);
+                });
+        }
     },
     mounted() {
 
