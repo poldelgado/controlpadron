@@ -136,12 +136,7 @@ export default {
                 intencion: intencion,
             }).then(response => {
                 if (response.data.success) {
-                    this.selectedEmpadronado.intencion_voto = intencion;
-                    if (intencion === 2) {
-                        this.$parent.numeros.favor++;
-                    } else if (intencion === 3) {
-                        this.$parent.numeros.contra++;
-                    }
+                    this.asignarIntencion(this.selectedEmpadronado,intencion);
                     this.hideModalIV();
                     console.log(response.data.message);
                 } else {
@@ -151,7 +146,31 @@ export default {
                     this.errors = error;
                     console.log(this.errors);
                 });
+        },
+        asignarIntencion(empadronado, intencion) {
+            switch(empadronado.intencion_voto) {
+                case 1:
+                        this.incrementarIntenciones(intencion);
+                        break;
+                case 2:
+                        this.$parent.numeros.favor--;
+                        this.incrementarIntenciones(intencion);
+                        break;
+                case 3:
+                        this.$parent.numeros.contra--;
+                        this.incrementarIntenciones(intencion);
+            }
+            empadronado.intencion_voto = intencion;
+        },
+        incrementarIntenciones(intencion) {
+           if (intencion === 2) {
+                this.$parent.numeros.favor++;
+           } else if (intencion === 3) {
+                this.$parent.numeros.contra++;
+           }
+
         }
+
     },
     mounted() {
 
