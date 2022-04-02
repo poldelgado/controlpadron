@@ -26,7 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::view('/maquetado','maquetado.index')->name('maquetado');
 Route::get('/users/get',[UserController::class,'get'])->name('users.get');
 Route::post('/users/change_status/{user_id}',[UserController::class,'changeStatus'])->name('users.changeStatus');
-Route::resource('/users',UserController::class);
+Route::resource('/users',UserController::class)->middleware('auth');
 Route::get('/padron/get',[EmpadronadoController::class,'get'])->name('padron.get');
 Route::get('/padron/getNumeros',[EmpadronadoController::class,'getNumeros'])->name('padron.getNumeros');
 Route::post('/padron/llamado/{id}',[EmpadronadoController::class,'setLlamado'])->name('padron.setLlamada');

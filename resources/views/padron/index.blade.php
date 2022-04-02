@@ -6,5 +6,5 @@
     </padron-list>
 @endsection
 @section('scripts')
-<script src="{{asset(mix('js/padronlist.js'))}}"></script>
+
 @endsection

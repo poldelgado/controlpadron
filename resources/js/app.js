@@ -3,13 +3,8 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
+window.Popper = require('@popperjs/core');
 require('./bootstrap');
-require( 'datatables');
-
-
-import $ from 'jquery';
-window.$ = window.jQuery = $;
 
 //window.Vue = require('vue').default;
 
@@ -31,10 +26,14 @@ window.$ = window.jQuery = $;
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-//  import { createApp } from 'vue';
+  import { createApp } from 'vue';
 
-//  const app = createApp({});
+  const app = createApp({});
 
-//  app.component('hello-world', require('./components/Welcome.vue').default);
+  app.component('padron-list', require('./pages/PadronList.vue').default);
+  app.component('user-list', require('./pages/UserList.vue').default);
 
-//  app.mount('#app');
+
+//app.component('hello-world', require('./components/Welcome.vue').default);
+
+app.mount('#app');

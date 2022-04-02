@@ -13,7 +13,5 @@
         <user-list></user-list>
     </div>
     <script src="{{mix('js/app.js')}}"></script>
-    <script src="{{mix('js/userslist.js')}}"></script>
-
 </body>
 </html>
