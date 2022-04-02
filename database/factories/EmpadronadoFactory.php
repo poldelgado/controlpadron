@@ -17,7 +17,9 @@ class EmpadronadoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nombre' => $this->faker->name(),
+            'apellido' => $this->faker->lastname(),
+            'dni' => $this->faker->unique()->randomNumber($nbDigits = 8),
         ];
     }
 }

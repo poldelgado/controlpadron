@@ -5,6 +5,11 @@
  */
 
 require('./bootstrap');
+require( 'datatables');
+
+
+import $ from 'jquery';
+window.$ = window.jQuery = $;
 
 //window.Vue = require('vue').default;
 

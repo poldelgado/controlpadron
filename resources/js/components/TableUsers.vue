@@ -1,13 +1,14 @@
 <template>
     <div class="content">
-        <table id="users" class="table">
+        <table id="users" class="table table-hover">
             <thead>
                 <tr>
-                    <td>#</td>
-                    <td>Apellido y Nombre</td>
-                    <td>Email</td>
-                    <td>Telefono</td>
-                    <td>- - -</td>
+                    <th>#</th>
+                    <th>Apellido y Nombre</th>
+                    <th>Email</th>
+                    <th>Telefono</th>
+                    <th>Estado</th>
+                    <th>- - -</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,16 +17,49 @@
                     <td>{{ user.apellido_nombre }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.phone }}</td>
-                    <td> <button class="btn btn-primary" @click.prevent="showModal(key)">abrir</button></td>
+                    <td>{{ userStatus(user.enabled) }}</td>
+                    <td>
+                        <div class="btn-toolbar" role="toolbar">
+                            <div class="btn-group" role="group">
+                                <button v-if="user.enabled" class="btn btn-sm btn-danger" @click.prevent="showModal(user,'desactivar')">
+                                    <strong><i class="bi bi-hand-thumbs-down"></i></strong>
+                                </button>
+                                <button
+                                    v-else
+                                    class="btn btn-sm btn-success"
+                                    @click.prevent="showModal(user,'activar')">
+                                    <strong><i class="bi bi-hand-thumbs-up"></i></strong>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
-        <modal-activate-users ref="modal"></modal-activate-users>
+        <modal-activate-users
+            ref="modal"
+            idmodal="modaluser"
+            sizemodal="modal-lg"
+        >
+            <template v-slot:body>
+                <h2 v-if="selectedUser != null">
+                    <strong># {{selectedUser.id}}</strong>
+                    Apellido y Nombre: <strong>{{selectedUser.apellido_nombre}}</strong>
+                </h2>
+            </template>
+            <template v-slot:footer>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-primary" type="button" @click.prevent="changeStatus(selectedUser)">
+                       <strong>CAMBIAR</strong>
+                    </button>
+                </div>
+            </template>
+        </modal-activate-users>
     </div>
 </template>
 
 <script>
-    import ModalActivateUsers from './ModalActivateUsers.vue';
+    import ModalActivateUsers from './Modal.vue';
     export default {
         components: {
             ModalActivateUsers,
@@ -34,18 +68,41 @@
         data() {
             return {
                 selectedUser: null,
+                errors: null,
             }
         },
         methods: {
-            showModal(key) {
-                this.selectedUser = this.users[key];
+            showModal(user, action) {
+                this.selectedUser = user;
+                this.$refs.modal.title = action === 'activar' ? 'ACTIVAR USUARIO':'DESACTIVAR USUARIO';
                 this.$refs.modal.showModal();
             },
             hideModal() {
                 this.$refs.modal.hideModal();
                 this.selectedUser = null;
             },
-        },
+            userStatus(status) {
+                return status ? 'ACTIVO':'NO ACTIVO';
+            },
+            changeStatus(user) {
+                const url = baseURL + '/users/change_status/'+user.id;
+                const status = !user.enabled;
+                axios.post(url, {
+                    status: status,
+                }).then(response => {
 
+                    if (response.data.success) {
+                        user.enabled=status;
+                        console.log(response.data.message);
+                        this.hideModal();
+                    } else {
+                        console.log(response.data.message);
+                    }
+                }).catch(error => {
+                    this.errors = error;
+                    console.log(this.errors);
+                });
+            },
+        },
     }
 </script>
