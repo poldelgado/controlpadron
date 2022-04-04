@@ -77,8 +77,6 @@ export default {
                     response.data.meta.links[0].label="Previo";
                     response.data.meta.links[response.data.meta.links.length - 1].label="Próximo";
                 }
-
-                //this.empadronados.data = response.data.data;
             });
         },
         getNumeros(urlNumeros) {
