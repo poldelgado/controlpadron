@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\ResetPasswordNotification;
+use App\Models\Empadronado;
+use App\Models\EmpadronadoUser;
 
 class User extends Authenticatable
 {
@@ -57,4 +59,15 @@ class User extends Authenticatable
         $this->notify(new ResetPasswordNotification($token));
     }
 
+    public function empadronados()
+    {
+        return $this->belongsToMany(Empadronado::class,'empadronado_user','user_id','empadronado_id')
+                        ->using(EmpadronadoUser::class)
+                        ->orderByRaw('lower(apellido)')
+                        ->orderByRaw('lower(nombre)')
+                        ->withPivot([
+                            'created_at'
+                        ]);
+
+    }
 }

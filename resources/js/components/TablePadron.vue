@@ -16,13 +16,12 @@
                     <td>{{ empadronado.apellido_nombre }}</td>
                     <td>{{ empadronado.dni }}</td>
                     <td>
-                        <a v-if="!empadronado.llamado" href="#" class="text-decoration-none" @click.prevent="showModal(key)">
+                        <a v-if="!empadronado.is_llamado" href="#" class="text-decoration-none" @click.prevent="showModal(key)">
                             <i class="bi bi-telephone-plus-fill text-secondary iconos px-2"></i>
                         </a>
                         <a v-else class="text-decoration-none">
-                            <i class="bi bi-telephone text-success iconos px-2"></i>
+                            <i class="bi bi-check2 text-success iconos px-2"></i>
                         </a>
-
                     </td>
                     <td>
                         <div>
@@ -45,9 +44,23 @@
             sizemodal="modal-lg"
         >
         <template v-slot:body>
-            <h2 v-if="selectedEmpadronado !=null">
+            <div>
+                <h2 v-if="isSelectedEmpadronado">
                 ¿Registrar llamada a <strong>{{selectedEmpadronado.apellido_nombre}}</strong>?
             </h2>
+            <div v-if="isUsersInSelectedEmpadronado">
+                <h3>Llamado por:</h3>
+                <div class="text-center">
+                    <ul class="list-group">
+                        <li v-for="user in selectedEmpadronado.users" :key="user.id" class="list-group-item">
+                            <strong>{{user.apellido_nombre}}</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+
+
         </template>
         <template v-slot:footer>
             <button class="btn btn-primary" @click.prevent="submitLlamada">REGISTRAR</button>
@@ -94,6 +107,24 @@ export default {
             selectedEmpadronado: null,
         }
     },
+    computed: {
+        isSelectedEmpadronado() {
+            if (this.selectedEmpadronado !== null) {
+                return true;
+            }
+            return false;
+        },
+        isUsersInSelectedEmpadronado() {
+            if (this.isSelectedEmpadronado) {
+                console.log('hay un empadronado seleccionado');
+                if (this.selectedEmpadronado.users.length > 0) {
+                    console.log('el selected empadronado tiene usuarios');
+                    return true;
+                }
+            }
+            return false;
+        }
+    },
     methods: {
         showModal(key) {
             this.selectedEmpadronado = this.empadronados[key];
@@ -117,7 +148,7 @@ export default {
                 llamado: true,
             }).then(response => {
                 if (response.data.success) {
-                    this.selectedEmpadronado.llamado = true,
+                    this.selectedEmpadronado.is_llamado = true,
                     this.$parent.numeros.llamados++;
                     console.log(response.data.message);
                     this.hideModal();

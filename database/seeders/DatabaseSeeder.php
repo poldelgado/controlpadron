@@ -21,6 +21,17 @@ class DatabaseSeeder extends Seeder
             'email' => 'poldelgado@gmail.com',
             'phone' => '381-333-3333',
             'enabled' => true,
+            'admin' => true,
+            'password' => '$2y$10$UcsQvZ32Tjd6GmBYxalkjeMc2rQTQX4VN11ZVQbAIkXbo3Tt7h9Ni',
+            'remember_token' => Str::random(10),
+        ]);
+        \App\Models\User::create([
+            'name' => 'Administrador',
+            'lastname' => 'App',
+            'email' => 'admin@app.com',
+            'phone' => '381-333-3333',
+            'enabled' => true,
+            'admin' => true,
             'password' => '$2y$10$UcsQvZ32Tjd6GmBYxalkjeMc2rQTQX4VN11ZVQbAIkXbo3Tt7h9Ni',
             'remember_token' => Str::random(10),
         ]);

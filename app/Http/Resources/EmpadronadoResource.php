@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
+
 
 class EmpadronadoResource extends JsonResource
 {
@@ -21,6 +23,8 @@ class EmpadronadoResource extends JsonResource
             'dni' => $this->dni,
             'llamado' => $this->llamado,
             'intencion_voto' => $this->intencion_voto,
+            'users' => UserAPIResource::collection($this->users),
+            'is_llamado' => $this->isLlamado(Auth::user()->id),
         ];
     }
 }

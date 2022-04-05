@@ -16,7 +16,7 @@ class UserAPIResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'apellido_nombre' => ucwords(mb_strtolower($this->lastname. ", ". $this->name)),
+            'apellido_nombre' => mb_strtoupper($this->lastname. ", ". $this->name),
             'email' => $this->email,
             'phone' => $this->phone,
             'enabled' => $this->enabled,

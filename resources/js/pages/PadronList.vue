@@ -3,7 +3,7 @@
         <section>
             <Carrousel />
         </section>
-        <section v-if="empadronados" class="d-flex justify-content-around row mb-3">
+        <section v-if="mostrarNumeros" class="d-flex justify-content-around row mb-3">
             <div class="col-6 col-md-3">
                 <CardResultado
                     tipo="Padrón"
@@ -62,12 +62,20 @@ export default {
         SearchBar,
         Pagination,
     },
-    props: ['url','urlNumeros','urlBanner'],
+    props: ['url','urlNumeros','urlBanner','admin'],
     data() {
         return {
             empadronados: null,
             numeros: null,
         }
+    },
+    computed: {
+        mostrarNumeros() {
+            if (this.empadronados !== null && this.admin) {
+                return true;
+            }
+            return false;
+        },
     },
     methods: {
         getEmpadronados(url) {
@@ -77,8 +85,6 @@ export default {
                     response.data.meta.links[0].label="Previo";
                     response.data.meta.links[response.data.meta.links.length - 1].label="Próximo";
                 }
-
-                //this.empadronados.data = response.data.data;
             });
         },
         getNumeros(urlNumeros) {
