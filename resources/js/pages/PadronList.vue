@@ -78,7 +78,10 @@ export default {
         },
     },
     methods: {
-        getEmpadronados(url) {
+        getEmpadronados(url,filter = null) {
+            if (filter !== null) {
+                url = url+'/'+filter;
+            }
              axios.get(url).then(response => {
                 this.empadronados = response.data;
                 if (response.data.meta !== null || response.data.meta !== undefined) {

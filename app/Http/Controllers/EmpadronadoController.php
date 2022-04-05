@@ -87,10 +87,21 @@ class EmpadronadoController extends Controller
         //
     }
 
-    public function get()
+    public function get($nombre_dni = null)
     {
+        if (!isset($nombre_dni))
+        {
+            $empadronados = new EmpadronadoCollection(
+                Empadronado::with('users')
+                            ->orderBy('apellido')
+                            ->orderBy('nombre')
+                            ->paginate(50)
+            );
+            return $empadronados;
+        }
         $empadronados = new EmpadronadoCollection(
             Empadronado::with('users')
+                        ->nombreodni($nombre_dni)
                         ->orderBy('apellido')
                         ->orderBy('nombre')
                         ->paginate(50)

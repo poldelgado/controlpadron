@@ -43,4 +43,15 @@ class Empadronado extends Model
         }
         return false;
     }
+
+    /**
+     * @param $query
+     * @param $nombre string
+     */
+    public function scopeNombreODni($query, string $nombre)
+    {
+        if (trim($nombre) != '') {
+            $query->whereRaw("concat(lower(apellido),lower(nombre),dni::varchar(255)) like '%".$nombre."%'")->orderBy('apellido');
+        }
+    }
 }
