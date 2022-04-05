@@ -45,9 +45,21 @@
             sizemodal="modal-lg"
         >
         <template v-slot:body>
-            <h2 v-if="selectedEmpadronado !=null">
+            <div>
+                <h2 v-if="isSelectedEmpadronado">
                 ¿Registrar llamada a <strong>{{selectedEmpadronado.apellido_nombre}}</strong>?
             </h2>
+            <div v-if="isUsersInSelectedEmpadronado">
+                <h3>Llamado Por</h3>
+                    <ul>
+                    <li v-for="user in selectedEmpadronado.users">
+                        {{user.apellido_nombre}}
+                    </li>
+                </ul>
+            </div>
+            </div>
+
+
         </template>
         <template v-slot:footer>
             <button class="btn btn-primary" @click.prevent="submitLlamada">REGISTRAR</button>
@@ -92,6 +104,22 @@ export default {
     data() {
         return {
             selectedEmpadronado: null,
+        }
+    },
+    computed: {
+        isSelectedEmpadronado() {
+            if (this.selectedEmpadronado !== null) {
+                return true;
+            }
+            return false;
+        },
+        isUsersInSelectedEmpadronado() {
+            if (this.isSelectedEmpadronado) {
+                if (this.selectedEmpadronado.users.length > 1) {
+                    return true;
+                }
+            }
+            return false;
         }
     },
     methods: {

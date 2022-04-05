@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class EmpadronadoUser extends Model
+class EmpadronadoUser extends Pivot
 {
     use HasFactory;
+    public $incrementing = true;
+
+    protected $table = 'empadronado_user';
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empadronado;
+use App\Models\EmpadronadoUser;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\EmpadronadoCollection;
 use Illuminate\Http\Request;
 
@@ -97,7 +99,7 @@ class EmpadronadoController extends Controller
     public function getNumeros()
     {
         $total = count(Empadronado::all());
-        $llamados = count(Empadronado::where('llamado',1)->get());
+        $llamados = count(EmpadronadoUser::all());
         $favor = count(Empadronado::where('intencion_voto',2)->get());
         $contra = count(Empadronado::where('intencion_voto',3)->get());
 
@@ -116,20 +118,23 @@ class EmpadronadoController extends Controller
         $this->validate($request, [
             'llamado' => 'required|boolean',
         ]);
-       $empadronado = Empadronado::findOrFail($id);
+        $empadronado = Empadronado::findOrFail($id);
+        $user = Auth::user()->id;
 
-       $empadronado->llamado = $request->llamado;
+        if (!$empadronado->isLLamado()) {
+            $empadronado->users()->attach($user->id);
+        }
 
-       if ($empadronado->save()) {
-           return response()->json([
-               'success' => true,
-               'message' => 'Llamada registrada con éxito'
-           ],201);
-       }
-       return response()->json([
-           'success' => false,
-           'message' => 'Ocurrió un error al registrar la llamada',
-       ],400);
+        if ($empadronado->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Llamada registrada con éxito'
+            ],201);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Ocurrió un error al registrar la llamada',
+        ],400);
     }
 
     public function setIV(Request $request, $id)

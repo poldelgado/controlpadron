@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Empadronado;
+use App\Models\EmpadronadoUser;
 
 class User extends Authenticatable
 {
@@ -49,5 +51,17 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->admin === 1 ? true:false;
+    }
+
+    public function empadronados()
+    {
+        return $this->belongsToMany(Empadronado::class,'empadronado_user','user_id','empadronado_id')
+                        ->using(EmpadronadoUser::class)
+                        ->orderByRaw('lower(apellido)')
+                        ->orderByRaw('lower(nombre)')
+                        ->withPivot([
+                            'created_at'
+                        ]);
+
     }
 }

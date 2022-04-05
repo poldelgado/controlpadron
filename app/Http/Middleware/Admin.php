@@ -16,7 +16,7 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (! $request->user()->isAdmin()) {
+        if (! ($request->user()->isAdmin() && $request->user()->enabled)) {
             return response()->view('forbidden',[],403);
         }
         return $next($request);
