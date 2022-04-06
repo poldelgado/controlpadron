@@ -62,7 +62,7 @@ export default {
         SearchBar,
         Pagination,
     },
-    props: ['url','urlNumeros','urlBanner','admin'],
+    props: ['url','urlNumeros','urlBanner','urlBannerEstamento','admin'],
     data() {
         return {
             empadronados: null,
