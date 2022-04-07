@@ -12,7 +12,7 @@
             </thead>
             <tbody>
                 <tr v-for="(empadronado, key) in empadronados" :key="key">
-                    <td>{{ key + 1}}</td>
+                    <td>{{ empadronado.id}}</td>
                     <td>{{ empadronado.apellido_nombre }}</td>
                     <td>{{ empadronado.dni }}</td>
                     <td>
