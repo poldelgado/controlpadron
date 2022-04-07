@@ -19,9 +19,9 @@ return [
 
     'allowed_methods' => ['*','POST','GET','PUT','PATCH'],
 
-    'allowed_origins' => ['*','https://www.padronlistaplural.com.ar','https://padronlistaplural.com.ar'],
+    'allowed_origins' => ['*','padronlistaplural.com.ar','*.padronlistaplural.com.ar'],
 
-    'allowed_origins_patterns' => ['*','https://www.padronlistaplural.com.ar','https://padronlistaplural.com.ar'],
+    'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],
 
