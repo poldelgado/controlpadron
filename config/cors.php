@@ -17,11 +17,11 @@ return [
 
     'paths' => ['*','api/*', 'sanctum/csrf-cookie'],
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['*','POST','GET','PUT','PATCH'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['*','https://www.padronlistaplural.com.ar','https://padronlistaplural.com.ar'],
 
-    'allowed_origins_patterns' => ['*'],
+    'allowed_origins_patterns' => ['*','https://www.padronlistaplural.com.ar','https://padronlistaplural.com.ar'],
 
     'allowed_headers' => ['*'],
 
