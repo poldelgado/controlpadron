@@ -27,7 +27,7 @@ Route::post('/users/change_status/{user_id}',[UserController::class,'changeStatu
 Route::resource('/users',UserController::class)->middleware('auth');
 Route::get('/padron/get/{nombre_dni?}',[EmpadronadoController::class,'get'])->name('padron.get')->middleware('auth');
 Route::get('/padron/getNumeros',[EmpadronadoController::class,'getNumeros'])->name('padron.getNumeros')->middleware('auth');
-Route::post('/padron/llamado/{id}',[EmpadronadoController::class,'setLlamado'])->name('padron.setLlamada')->middleware('auth');
-Route::post('/padron/iv/{id}',[EmpadronadoController::class,'setIV'])->name('padron.setIV')->middleware('auth');
+Route::post('/padron/llamado/{id}',[EmpadronadoController::class,'setLlamado'])->name('padron.setLlamada');
+Route::post('/padron/iv/{id}',[EmpadronadoController::class,'setIV'])->name('padron.setIV');
 Route::resource('/padron',EmpadronadoController::class)->middleware('auth');
 Route::resource('/lista',ListaController::class);
