@@ -31,11 +31,11 @@
                                     <strong><i class="bi bi-hand-thumbs-up"></i></strong>
                                 </button>
                             </div>
-                            <div class="btn-group ms-1" role="group" aria-label="user">
+                            <!-- <div class="btn-group ms-1" role="group" aria-label="user">
                                 <button type="button" class="btn btn-sm btn-secondary" title="controlar punteo" @click="showModalUserAudit(user)">
                                     <i class="bi bi-eye"></i>
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
                     </td>
                 </tr>
