@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\EmpadronadoResource;
 
 class UserAPIResource extends JsonResource
 {
@@ -20,6 +21,7 @@ class UserAPIResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'enabled' => $this->enabled,
+            'empadronados' => $this->whenLoaded('empadronados'),
         ];
     }
 }

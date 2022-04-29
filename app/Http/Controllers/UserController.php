@@ -86,7 +86,7 @@ class UserController extends Controller
 
     public function get()
     {
-        $users = UserAPIResource::collection(User::orderBy('lastname')->get());
+        $users = UserAPIResource::collection(User::with('empadronados')->orderBy('lastname')->get());
         return response()->json([
             'success' => true,
             'users' => $users,

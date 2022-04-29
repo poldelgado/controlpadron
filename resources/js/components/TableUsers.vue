@@ -31,12 +31,18 @@
                                     <strong><i class="bi bi-hand-thumbs-up"></i></strong>
                                 </button>
                             </div>
+                            <div class="btn-group ms-1" role="group" aria-label="user">
+                                <button type="button" class="btn btn-sm btn-secondary" title="controlar punteo" @click="showModalUserAudit(user)">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <modal-activate-users
+        <!-- Modal Activar Usuario -->
+        <modal
             ref="modal"
             idmodal="modaluser"
             sizemodal="modal-lg"
@@ -46,39 +52,77 @@
                     <strong># {{selectedUser.id}}</strong>
                     Apellido y Nombre: <strong>{{selectedUser.apellido_nombre}}</strong>
                 </h2>
+                <div v-if="isEmpadronadosInSelecteduser">
+                    <h3>Llamo a:</h3>
+                    <div class="text-center">
+                        <ul class="list-group">
+                            <li v-for="empadronado in selectedUser.empadronados" :key="empadronado.id" class="list-group-item">
+                                <strong>{{empadronado.apellido+', '+empadronado.nombre+' DNI: '+empadronado.dni}}</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </template>
             <template v-slot:footer>
                 <div class="d-grid gap-2 col-6 mx-auto">
                     <button class="btn btn-primary" type="button" @click.prevent="changeStatus(selectedUser)">
-                       <strong>CAMBIAR</strong>
+                       <strong>{{buttonTitle}}</strong>
                     </button>
                 </div>
             </template>
-        </modal-activate-users>
+        </modal>
     </div>
 </template>
 
 <script>
-    import ModalActivateUsers from './Modal.vue';
+    import Modal from './Modal.vue';
     export default {
         components: {
-            ModalActivateUsers,
+            Modal,
         },
         props: ['users'],
         data() {
             return {
                 selectedUser: null,
                 errors: null,
+                buttonTitle: null,
             }
         },
+        computed: {
+        isSelectedUser() {
+            if (this.selectedUser !== null) {
+                return true;
+            }
+            return false;
+        },
+        isEmpadronadosInSelecteduser() {
+            if (this.isSelectedUser) {
+                console.log('hay un usuario seleccionado');
+                if (this.selectedUser.empadronados.length > 0) {
+                    console.log('el usuario tiene empadronados marcados');
+                    return true;
+                }
+            }
+            return false;
+        }
+    },
         methods: {
             showModal(user, action) {
                 this.selectedUser = user;
-                this.$refs.modal.title = action === 'activar' ? 'ACTIVAR USUARIO':'DESACTIVAR USUARIO';
+                this.buttonTitle = action === 'activar' ? 'ACTIVAR USUARIO':'DESACTIVAR USUARIO';
+                this.$refs.modal.title = this.buttonTitle;
                 this.$refs.modal.showModal();
             },
             hideModal() {
                 this.$refs.modal.hideModal();
+                this.selectedUser = null;
+            },
+            showModalUserAudit(user) {
+                this.selectedUser = user;
+                this.$refs.modalAudit.showModal();
+            },
+            hideModalUserAudit() {
+                this.$refs.modalAudit.hideModal();
                 this.selectedUser = null;
             },
             userStatus(status) {
